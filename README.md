@@ -88,3 +88,19 @@ This repository includes a `render.yaml` Blueprint for easy deployment on [Rende
 5.  **Publish Directory:** `dist`
 6.  **Environment Variables:** Add `VITE_API_URL` (The URL of your deployed backend, e.g., `https://hrms-backend.onrender.com`).
 7.  **Plan:** Free by default.
+
+## Deployment on Vercel (Frontend Only)
+
+Vercel is an excellent choice for deploying the frontend due to its global CDN and performance.
+
+### Steps:
+1.  Go to [Vercel Dashboard](https://vercel.com/dashboard) and click **Add New...** > **Project**.
+2.  Import your GitHub repository.
+3.  **Configure Project:**
+    *   **Framework Preset:** Vite
+    *   **Root Directory:** Click `Edit` and select the `frontend` folder.
+4.  **Environment Variables:**
+    *   Expand the **Environment Variables** section.
+    *   Key: `VITE_API_URL`
+    *   Value: Your deployed Backend URL (e.g., from Render or Railway).
+5.  Click **Deploy**.
