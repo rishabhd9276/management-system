@@ -68,14 +68,23 @@ This repository includes a `render.yaml` Blueprint for easy deployment on [Rende
 5.  Click **Apply**. Render will deploy both the Backend (Web Service) and Frontend (Static Site).
 6.  The Frontend will automatically be configured to talk to the Backend via the `VITE_API_URL` environment variable.
 
-### Manual Deployment (Optional)
+### Manual Deployment (If Blueprint fails or asks for payment)
 
-#### Frontend
-- Build command: `npm run build`
-- Output directory: `dist`
-- Environment Variable: `VITE_API_URL` (URL of your deployed backend)
+**Step 1: Deploy Backend (Web Service)**
+1.  Create a new **Web Service**.
+2.  Connect your repo.
+3.  **Root Directory:** `backend`
+4.  **Environment:** `Python 3`
+5.  **Build Command:** `pip install -r requirements.txt`
+6.  **Start Command:** `uvicorn main:app --host 0.0.0.0 --port $PORT`
+7.  **Plan:** Select **Free** instance type.
+8.  **Environment Variables:** Add `MONGO_URL` (your MongoDB Atlas connection string).
 
-#### Backend
-- Build command: `pip install -r backend/requirements.txt`
-- Start command: `cd backend && uvicorn main:app --host 0.0.0.0 --port $PORT`
-- Environment Variable: `MONGO_URL` (Your MongoDB connection string)
+**Step 2: Deploy Frontend (Static Site)**
+1.  Create a new **Static Site** (NOT Web Service).
+2.  Connect your repo.
+3.  **Root Directory:** `frontend`
+4.  **Build Command:** `npm install && npm run build`
+5.  **Publish Directory:** `dist`
+6.  **Environment Variables:** Add `VITE_API_URL` (The URL of your deployed backend, e.g., `https://hrms-backend.onrender.com`).
+7.  **Plan:** Free by default.
