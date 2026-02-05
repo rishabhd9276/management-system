@@ -1,3 +1,4 @@
+# Render Blueprint for HRMS Lite
 services:
   # Backend Service
   - type: web
