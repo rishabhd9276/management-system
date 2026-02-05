@@ -17,6 +17,15 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+@app.get("/health")
+async def health_check():
+    try:
+        # Ping the database
+        await db.command("ping")
+        return {"status": "ok", "database": "connected"}
+    except Exception as e:
+        return {"status": "error", "database": str(e)}
+
 # --- Employee Endpoints ---
 
 @app.post("/employees/", response_model=Employee, status_code=status.HTTP_201_CREATED)
