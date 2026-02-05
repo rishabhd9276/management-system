@@ -10,9 +10,15 @@ services:
       - key: MONGO_URL
         sync: false # User will be prompted to enter this value (e.g., from MongoDB Atlas)
 
-staticSites:
   # Frontend Service
-  - name: hrms-lite-frontend
+  - type: pserv # Wait, pserv is private service. Static site is 'site'.
+    # Actually, let's verify if 'site' is valid.
+    # If 'site' is not valid, then Render might treat static sites differently or I need to check the spec.
+    # Common confusion: Render UI calls it "Static Site", yaml might call it "site".
+    # Let's try 'site'.
+    type: site
+    name: hrms-lite-frontend
+    env: static
     buildCommand: cd frontend && npm install && npm run build
     publishPath: frontend/dist
     routes:
