@@ -9,17 +9,9 @@ import datetime
 app = FastAPI(title="HRMS Lite API")
 
 # CORS
-origins = [
-    "http://localhost:5173",  # Vite default
-    "http://localhost:3000",
-    "https://hrmslite-twgu.onrender.com", # Your deployed frontend
-    "https://hrmslite-twgu.onrender.com/",
-    "*" # Allow all for debugging/simplicity
-]
-
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=["*"], # Allow all origins for simplicity in this demo
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
