@@ -12,7 +12,9 @@ app = FastAPI(title="HRMS Lite API")
 origins = [
     "http://localhost:5173",  # Vite default
     "http://localhost:3000",
-    "*" # For ease of development, restrict in production
+    "https://hrmslite-twgu.onrender.com", # Your deployed frontend
+    "https://hrmslite-twgu.onrender.com/",
+    "*" # Allow all for debugging/simplicity
 ]
 
 app.add_middleware(
