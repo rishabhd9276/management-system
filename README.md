@@ -56,16 +56,26 @@ Frontend will run at: `http://localhost:5173`
 - Authentication is not implemented (Admin access assumed).
 - Deployment requires a MongoDB instance (e.g., MongoDB Atlas).
 
-## Deployment
+## Deployment on Render
 
-### Frontend (Vercel/Netlify)
+This repository includes a `render.yaml` Blueprint for easy deployment on [Render](https://render.com).
+
+### Steps:
+1.  Create a new **Blueprint Instance** on Render.
+2.  Connect your GitHub repository.
+3.  Render will automatically detect the `render.yaml` configuration.
+4.  **Important:** You will be prompted to provide the `MONGO_URL`. You can get a free connection string from [MongoDB Atlas](https://www.mongodb.com/atlas/database).
+5.  Click **Apply**. Render will deploy both the Backend (Web Service) and Frontend (Static Site).
+6.  The Frontend will automatically be configured to talk to the Backend via the `VITE_API_URL` environment variable.
+
+### Manual Deployment (Optional)
+
+#### Frontend
 - Build command: `npm run build`
 - Output directory: `dist`
-- Set environment variable `VITE_API_URL` if you modify the API base URL handling (currently hardcoded to localhost in `api.js` for local dev, should be updated for prod).
+- Environment Variable: `VITE_API_URL` (URL of your deployed backend)
 
-*Note: In `src/services/api.js`, update `API_URL` to your deployed backend URL before building.*
-
-### Backend (Render/Railway)
-- Build command: `pip install -r requirements.txt`
-- Start command: `uvicorn main:app --host 0.0.0.0 --port $PORT`
-- Set `MONGO_URL` environment variable.
+#### Backend
+- Build command: `pip install -r backend/requirements.txt`
+- Start command: `cd backend && uvicorn main:app --host 0.0.0.0 --port $PORT`
+- Environment Variable: `MONGO_URL` (Your MongoDB connection string)
