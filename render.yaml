@@ -25,4 +25,4 @@ services:
         fromService:
           type: web
           name: hrms-lite-backend
-          property: url
+          property: host

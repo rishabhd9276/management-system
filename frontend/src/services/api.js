@@ -1,6 +1,13 @@
 import axios from 'axios';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+let apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+
+// Ensure the URL has a protocol (Render 'host' property returns just the domain)
+if (apiUrl && !apiUrl.startsWith('http')) {
+  apiUrl = `https://${apiUrl}`;
+}
+
+const API_URL = apiUrl;
 
 const api = axios.create({
   baseURL: API_URL,
